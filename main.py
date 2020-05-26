@@ -1,11 +1,9 @@
 import csv
+import sys
 from typing import Tuple
 
 
-csv_file: str = './ol_dump_works_2020-04-30_25_entries.csv'
-
-
-def load_csv() -> Tuple[str, str, str, str, str]:
+def load_csv(csv_file: str) -> Tuple[str, str, str, str, str]:
     with open(csv_file) as csv_stuff:
         reader = csv.reader(csv_stuff, delimiter='\t')
         for row in reader:
@@ -20,7 +18,13 @@ def load_csv() -> Tuple[str, str, str, str, str]:
 
 
 def main() -> None:
-    for a, b, c, d, e in load_csv():
+    if len(sys) < 2:
+        print('Could not find path to ol dump')
+        sys.exit()
+
+    csv_file_path: str = sys.arg[1]
+
+    for a, b, c, d, e in load_csv(csv_file_path):
         sql_insert: str = f"INSERT INTO dump (type, about, num, date, data) VALUES ('{a}', '{b}', {c}, '{d}', '{e}');"
         print(sql_insert)
 
