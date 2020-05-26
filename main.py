@@ -22,7 +22,7 @@ def main() -> None:
         print('Could not find path to ol dump')
         sys.exit()
 
-    csv_file_path: str = sys.arg[1]
+    csv_file_path: str = sys.argv[1]
 
     for a, b, c, d, e in load_csv(csv_file_path):
         sql_insert: str = f"INSERT INTO dump (type, about, num, date, data) VALUES ('{a}', '{b}', {c}, '{d}', '{e}');"
