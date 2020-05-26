@@ -18,7 +18,7 @@ def load_csv(csv_file: str) -> Tuple[str, str, str, str, str]:
 
 
 def main() -> None:
-    if len(sys.arg) < 2:
+    if len(sys.argv) < 2:
         print('Could not find path to ol dump')
         sys.exit()
 
