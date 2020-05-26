@@ -21,7 +21,8 @@ def load_csv() -> Tuple[str, str, str, str, str]:
 
 def main() -> None:
     for a, b, c, d, e in load_csv():
-        print(a, b, c, d, e)
+        sql_insert: str = f"INSERT INTO dump (type, about, num, date, data) VALUES ('{a}', '{b}', {c}, '{d}', '{e}');"
+        print(sql_insert)
 
 
 if __name__ == '__main__':
