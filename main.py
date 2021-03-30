@@ -42,6 +42,20 @@ def load_csv(csv_file: str) -> List[Dump]:
     return alist
 
 
+def load_csv_gen(csv_file: str) -> List[Dump]:
+    with open(csv_file) as csv_stuff:
+        reader = csv.reader(csv_stuff, delimiter='\t')
+        for row in reader:
+            type_field: str = row[0].split('/')[-1]
+            work_field: str = row[1].split('/')[-1]
+            num_field: int = int(row[2])
+            date_field: datetime.datetime = datetime.datetime.strptime(row[3], '%Y-%m-%dT%H:%M:%S.%f')
+            json_field: Dict = json.loads(row[4].replace("'", "\'"))
+
+            new_row: Dump = Dump(type_field, work_field, num_field, date_field, json_field)
+            yield new_row
+
+
 def main() -> None:
     if len(sys.argv) < 2:
         print('Could not find path to ol dump')
